@@ -17,37 +17,26 @@ func Part2() {
 		sack := input[i]
 		sacker := input[i+1]
 		sackest := input[i+2]
-
 		for _, x := range sack {
 			freq[x] = 1
 		}
-
 		for _, y := range sacker {
 			if freq[y] == 1 {
 				freq[y]++
 			}
 
 		}
-
 		for _, z := range sackest {
 			if freq[z] == 2 {
-				freq[z]++
+				sum += getPriority(z)
 				break
 			}
 
-		}
-
-		for key, val := range freq {
-			if val == 3 {
-				sum += getPriority(key)
-				break
-			}
 		}
 
 	}
 	fmt.Println(sum)
 }
-
 func Part1() {
 	input := help.GetInput(inputFile)
 	sum := 0
@@ -61,7 +50,6 @@ func Part1() {
 				freq[h] = 1
 			}
 		}
-
 		for _, t := range tail {
 			if freq[t] != 0 {
 				sum += getPriority(t)
@@ -71,11 +59,9 @@ func Part1() {
 	}
 	fmt.Println(sum)
 }
-
 func getPriority(c rune) int {
 	if c >= 97 && c <= 122 {
 		return int(c) - 96
 	}
-
 	return int(c) - 38
 }
