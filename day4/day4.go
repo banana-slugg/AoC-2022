@@ -12,7 +12,6 @@ const inputFile = "./day4/input.txt"
 func Part2() {
 	input := help.GetInput(inputFile)
 	count := 0
-
 	for _, v := range input {
 		pair := strings.Split(v, ",")
 		first := strings.Split(pair[0], "-")

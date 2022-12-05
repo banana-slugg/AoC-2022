@@ -44,3 +44,15 @@ func MapInt(input []string) []int {
 	}
 	return temp
 }
+
+func MapIntSpread(input ...string) []int {
+	temp := make([]int, len(input))
+	for i, v := range input {
+		converted, err := strconv.Atoi(v)
+		if err != nil {
+			fmt.Println(err)
+		}
+		temp[i] = converted
+	}
+	return temp
+}
