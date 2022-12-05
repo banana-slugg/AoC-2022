@@ -56,3 +56,11 @@ func MapIntSpread(input ...string) []int {
 	}
 	return temp
 }
+
+func ReverseString(input string) string {
+	temp := ""
+	for _, v := range input {
+		temp = string(v) + temp
+	}
+	return temp
+}

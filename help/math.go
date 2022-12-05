@@ -8,7 +8,7 @@ func Sum(input []int) int {
 	return sum
 }
 
-func Max(input []int) int {
+func Max(input ...int) int {
 	max := 0
 	for _, v := range input {
 		if v > max {
