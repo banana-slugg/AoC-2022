@@ -12,7 +12,6 @@ func Part2() {
 	input := help.GetInputString(inputFile)
 	for i := 0; i < len(input)-3; i++ {
 		temp := make(map[byte]int)
-
 		for j := 0; j < 14; j++ {
 			temp[input[i+j]]++
 		}
