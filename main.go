@@ -1,8 +1,8 @@
 package main
 
-import "github.com/crims1n/AoC-2022/day5"
+import "github.com/crims1n/AoC-2022/day6"
 
 func main() {
-	day5.Part1()
-	day5.Part2()
+	day6.Part1()
+	day6.Part2()
 }
