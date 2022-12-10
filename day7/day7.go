@@ -29,7 +29,6 @@ func Part2() {
 			}
 			continue
 		}
-
 		num, err := strconv.Atoi(cmd[0])
 		if err != nil {
 			continue
@@ -37,7 +36,6 @@ func Part2() {
 		for i := range path {
 			dirs[getWorkingDir(path[:i+1])] += num
 		}
-
 	}
 	valid := make([]int, 0)
 	freeSpace := 70000000 - dirs["/"]
