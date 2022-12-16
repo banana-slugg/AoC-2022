@@ -9,6 +9,88 @@ import (
 
 const inputFile = "./day8/input.txt"
 
+func Part2() {
+	input := help.GetInput(inputFile)
+	nums := make([][]int, len(input))
+	for i, v := range input {
+		split := strings.Split(v, "")
+		nums[i] = help.MapInt(split)
+	}
+	scores := make([]int, 0)
+
+	for i, row := range nums {
+		for j := range row {
+
+			scores = append(scores, getScenicScore(i, j, nums))
+
+		}
+	}
+
+	fmt.Println(help.Max(scores...))
+}
+
+func getScenicScore(row, col int, trees [][]int) int {
+	up, down, left, right := 0, 0, 0, 0
+	size := len(trees[0])
+	if row == 0 || col == 0 || row == size-1 || col == size-1 {
+		return 0
+	}
+
+	// row forwards
+	for i := row; i < size-1; i++ {
+		if trees[row][col] > trees[i+1][col] {
+			up++
+			if i+1 == size-1 {
+				break
+			}
+			continue
+		}
+		up++
+		break
+	}
+
+	// row backwards
+	for i := row; i > 0; i-- {
+		if trees[row][col] > trees[i-1][col] {
+			down++
+			if i-1 == 0 {
+				break
+			}
+			continue
+		}
+		down++
+		break
+	}
+
+	//col forwards
+	for i := col; i < size-1; i++ {
+		if trees[row][col] > trees[row][i+1] {
+			right++
+			if i+1 == size-1 {
+				break
+			}
+			continue
+		}
+		right++
+		break
+	}
+
+	// col backwards
+	for i := col; i > 0; i-- {
+		if trees[row][col] > trees[row][i-1] {
+			left++
+			if i-1 == 0 {
+				break
+			}
+			continue
+		}
+		left++
+		break
+	}
+
+	return up * down * left * right
+}
+
 func Part1() {
 	input := help.GetInput(inputFile)
 	nums := make([][]int, len(input))
@@ -24,7 +106,6 @@ func Part1() {
 			if isVisible(i, j, nums) {
 				count++
 			}
-			//fmt.Println(i, j, isVisible(i, j, nums), nums[i][j])
 		}
 	}
 
@@ -37,49 +118,45 @@ func isVisible(row, col int, trees [][]int) bool {
 		return true
 	}
 
-	tree := trees[row][col]
-	for i := col - 1; i >= 0; i-- {
-		if tree > trees[row][i] {
-			if i == 0 {
+	// row forwards
+	for i := row; i < size-1; i++ {
+		if trees[row][col] > trees[i+1][col] {
+			if i+1 == size-1 {
 				return true
 			}
-			tree = trees[row][i]
 			continue
 		}
 		break
 	}
 
-	tree = trees[row][col]
-	for i := col + 1; i < size; i++ {
-		if tree > trees[row][i] {
-			if i == size-1 {
+	// row backwards
+	for i := row; i > 0; i-- {
+		if trees[row][col] > trees[i-1][col] {
+			if i-1 == 0 {
 				return true
 			}
-			tree = trees[row][i]
 			continue
 		}
 		break
 	}
 
-	tree = trees[row][col]
-	for i := row - 1; i >= 0; i-- {
-		if tree > trees[i][col] {
-			if i == 0 {
+	//col forwards
+	for i := col; i < size-1; i++ {
+		if trees[row][col] > trees[row][i+1] {
+			if i+1 == size-1 {
 				return true
 			}
-			tree = trees[i][col]
 			continue
 		}
 		break
 	}
 
-	tree = trees[row][col]
-	for i := row + 1; i < size; i++ {
-		if tree > trees[i][col] {
-			if i == size-1 {
+	// col backwards
+	for i := col; i > 0; i-- {
+		if trees[row][col] > trees[row][i-1] {
+			if i-1 == 0 {
 				return true
 			}
-			tree = trees[i][col]
 			continue
 		}
 		break
